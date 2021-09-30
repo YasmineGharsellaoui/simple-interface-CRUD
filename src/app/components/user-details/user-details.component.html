@@ -1,0 +1,65 @@
+<div>
+    <div *ngIf="currentUser.id" class="edit-form">
+      <h4>User</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            [(ngModel)]="currentUser.nom"
+            name="nom"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="prenom"
+            [(ngModel)]="currentUser.prenom"
+            name="prenom"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ currentUser.published ? "Published" : "Pending" }}
+        </div>
+      </form>
+  
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentUser.email"
+        (click)="updateEmail(false)"
+      >
+        UnEmail
+      </button>
+      <button
+        *ngIf="!currentUser.published"
+        class="badge badge-primary mr-2"
+        (click)="updateEmail(true)"
+      >
+        Email
+      </button>
+  
+      <button class="badge badge-danger mr-2" (click)="deleteUser()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateUser()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentUser.id">
+      <br />
+      <p>Cannot access this User...</p>
+    </div>
+  </div>
